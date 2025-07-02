@@ -38,31 +38,26 @@ class FeedScreen extends StatelessWidget {
       },
     ];
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Instagram', style: TextStyle(fontFamily: 'Billabong', fontSize: 32)),
-        centerTitle: true,
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_border)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.send)),
-        ],
-      ),
       body: ListView(
         children: [
-          SizedBox(
-            height: 100,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-              itemCount: stories.length,
-              separatorBuilder: (_, __) => const SizedBox(width: 12),
-              itemBuilder: (context, index) {
-                final story = stories[index];
-                return StoryItem(
-                  userName: story['userName'] as String,
-                  userAvatarUrl: story['userAvatarUrl'] as String,
-                  hasStory: story['hasStory'] as bool,
-                );
-              },
+          Padding(
+            padding: const EdgeInsets.only(top: 16, bottom: 8),
+            child: SizedBox(
+              height: 90,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                itemCount: stories.length,
+                separatorBuilder: (_, __) => const SizedBox(width: 16),
+                itemBuilder: (context, index) {
+                  final story = stories[index];
+                  return StoryItem(
+                    userName: story['userName'] as String,
+                    userAvatarUrl: story['userAvatarUrl'] as String,
+                    hasStory: story['hasStory'] as bool,
+                  );
+                },
+              ),
             ),
           ),
           const Divider(height: 1),
@@ -73,6 +68,33 @@ class FeedScreen extends StatelessWidget {
                 caption: post['caption'] as String?,
                 hasStory: post['hasStory'] as bool,
               )),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Buscar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_box_outlined),
+            label: 'Novo',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.video_library_outlined),
+            label: 'Reels',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            label: 'Perfil',
+          ),
         ],
       ),
     );
